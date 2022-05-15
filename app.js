@@ -1,5 +1,6 @@
 import express from 'express'
 import db from './src/config/dbConexao.js'
+import members from './src/models/Member.js'
 
 const port = process.env.PORT || 3000
 
@@ -16,13 +17,10 @@ app.listen(port, ()=> console.log(`Servidor rodando na porta: ${port}`))
 
 //
 
-const members = [
-   {id: 1, "name": "Sony"},
-   {id: 2, "name": "Mike"}
-]
-
 app.get('/members', (req, res) => {
+   members.find((err, members) => {
    res.status(200).json(members)
+   })
 })
 
 app.get('/members/:id', (req, res) => {
