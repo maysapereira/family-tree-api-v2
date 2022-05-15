@@ -25,6 +25,11 @@ app.get('/members', (req, res) => {
    res.status(200).json(members)
 })
 
+app.get('/members/:id', (req, res) => {
+   let index = searchMember(req.params.id)
+   res.status(200).json(members[index])
+})
+
 app.post('/members', (req, res) => {
    members.push(req.body)
    res.status(201).send('Membro adicionado na árvore genealógica')
