@@ -13,7 +13,7 @@ class MemberController {
     static searchOneMember = (req, res) => {
         const id = req.params.id
 
-        members.findByIdAndUpdate(id, (err, members) => {
+        members.findById(id, (err, members) => {
             if(err) {
                 res.status(400).send(
                     {
