@@ -18,28 +18,4 @@ db.once("open", ()=> {
 app.get('/', (req,res)=> res.send("Funcionando"))
 app.listen(port, ()=> console.log(`Servidor rodando na porta: ${port}`))
 
-//
-
-app.get('/members/:id', (req, res) => {
-   let index = searchMember(req.params.id)
-   res.status(200).json(members[index])
-})
-
-app.put('/members/:id', (req, res) => {
-   let index = searchMember(req.params.id)
-   members[index].name = req.body.name
-   res.status(200).json(members)
-})
-
-app.delete('/members/:id', (req, res) => {
-   let {id} = req.params
-   let index = searchMember(id)
-   members.splice(index, 1)
-   res.send(`O membro de id ${id} foi removido com sucesso`)
-})
- 
-function searchMember(id) {
-   return members.findIndex(members => members.id == id)
-}
-
 export default app

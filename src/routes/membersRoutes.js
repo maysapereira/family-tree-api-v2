@@ -5,6 +5,7 @@ const router = express.Router()
 
 router
     .get('/members', MemberController.searchAllMembers)
+    .get('/members/:id', MemberController.searchOneMember)
     .post('/members', MemberController.createMember)
     .put('/members/:id', MemberController.updateMember)
 
