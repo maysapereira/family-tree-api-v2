@@ -8,6 +8,18 @@ class MemberController {
         })
     }
 
+    static createMember = (req, res) => {
+        let member = new members(req.body)
+
+        member.save((err) => {
+            if(err) {
+                res.status(500). send({message:`${err.message} - Failure to create member in family tree`})
+            } else {
+                res.status(201).send(member.toJSON())
+            }
+        })
+    }
+
 }
 
 export default MemberController

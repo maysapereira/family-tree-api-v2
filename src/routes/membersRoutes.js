@@ -5,5 +5,6 @@ const router = express.Router()
 
 router
     .get('/members', MemberController.searchAllMembers)
+    .post('/members', MemberController.createMember)
 
 export default router
