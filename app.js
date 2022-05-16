@@ -1,11 +1,14 @@
 import express from 'express'
 import db from './src/config/dbConexao.js'
 import members from './src/models/Member.js'
+import routes from './src/routes/index.js'
 
 const port = process.env.PORT || 3000
 
 const app = express()
 app.use(express.json())
+
+routes(app)
 
 db.on("error", console.log.bind(console, "Houve um erro ao se conectar com o banco de dados"))
 db.once("open", ()=> {
@@ -16,12 +19,6 @@ app.get('/', (req,res)=> res.send("Funcionando"))
 app.listen(port, ()=> console.log(`Servidor rodando na porta: ${port}`))
 
 //
-
-app.get('/members', (req, res) => {
-   members.find((err, members) => {
-   res.status(200).json(members)
-   })
-})
 
 app.get('/members/:id', (req, res) => {
    let index = searchMember(req.params.id)
