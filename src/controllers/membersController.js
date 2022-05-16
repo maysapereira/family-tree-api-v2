@@ -59,6 +59,25 @@ class MemberController {
         })
     }
 
+    static deleteMember = (req, res) => {
+        const id = req.params.id
+
+        members.findByIdAndDelete(id, (err) => {
+            if(!err){
+                res.status(200).send(
+                    {
+                        message: 'Member successfully removed'
+                    }
+                )
+            } else {
+                res.status(500).send(
+                    {
+                        message: err.message
+                    }
+                )
+            }
+        })
+    }
 }
 
 export default MemberController

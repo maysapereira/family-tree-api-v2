@@ -8,5 +8,6 @@ router
     .get('/members/:id', MemberController.searchOneMember)
     .post('/members', MemberController.createMember)
     .put('/members/:id', MemberController.updateMember)
+    .delete('/members/:id', MemberController.deleteMember)
 
 export default router
