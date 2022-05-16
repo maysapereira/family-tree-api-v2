@@ -4,8 +4,7 @@ const memberSchema = new mongoose.Schema(
     {
         id: {type: String},
         name: {type: String, required: true},
-        parents: {type: String},
-        children: {type: String}
+        relationship: {type: mongoose.Schema.Types.ObjectId, ref: 'relationship'}
     }
 )
 

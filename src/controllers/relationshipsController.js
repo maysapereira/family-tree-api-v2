@@ -1,19 +1,17 @@
-import members from "../models/Member.js";
+import relationships from "../models/Relationship.js";
 
-class MemberController {
+class RelationshipController {
 
-    static searchAllMembers = (req, res) => {
-        members.find()
-            .populate('relationship')
-            .exec((err, members) => {
-        res.status(200).json(members)  
+    static searchAllRelationships = (req, res) => {
+        relationships.find((err, relationships) => {
+        res.status(200).json(relationships)  
         })
     }
 
-    static searchOneMember = (req, res) => {
+    static searchOneRelationship = (req, res) => {
         const id = req.params.id
 
-        members.findByIdAndUpdate(id, (err, members) => {
+        relationships.findByIdAndUpdate(id, (err, relationships) => {
             if(err) {
                 res.status(400).send(
                     {
@@ -21,34 +19,34 @@ class MemberController {
                     }
                 )
             } else {
-                res.status(200).send(members)
+                res.status(200).send(relationships)
             }
         })
     }
 
-    static createMember = (req, res) => {
-        let member = new members(req.body)
+    static createRelationship = (req, res) => {
+        let relationship = new relationships(req.body)
 
-        member.save((err) => {
+        relationship.save((err) => {
             if(err) {
                 res.status(500). send(
                     {
-                        message:`${err.message} - Failure to create member in family tree`
+                        message:`${err.message} - Failure to create relationship in family tree`
                     })
             } else {
-                res.status(201).send(member.toJSON())
+                res.status(201).send(relationship.toJSON())
             }
         })
     }
 
-    static updateMember = (req, res) => {
+    static updateRelationship = (req, res) => {
         const id = req.params.id
 
-        members.findByIdAndUpdate(id, {$set: req.body}, (err) => {
+        relationships.findByIdAndUpdate(id, {$set: req.body}, (err) => {
             if(!err) {
                 res.status(200).send(
                     {
-                        message: `Member id ${id} sucessfully updated`
+                        message: `Relationship id ${id} sucessfully updated`
                     }
                 )
             } else {
@@ -61,14 +59,14 @@ class MemberController {
         })
     }
 
-    static deleteMember = (req, res) => {
+    static deleteRelationship = (req, res) => {
         const id = req.params.id
 
-        members.findByIdAndDelete(id, (err) => {
+        relationships.findByIdAndDelete(id, (err) => {
             if(!err){
                 res.status(200).send(
                     {
-                        message: 'Member successfully removed'
+                        message: 'Relationship successfully removed'
                     }
                 )
             } else {
@@ -82,4 +80,4 @@ class MemberController {
     }
 }
 
-export default MemberController
+export default RelationshipController
